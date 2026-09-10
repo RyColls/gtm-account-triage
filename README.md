@@ -121,11 +121,25 @@ be auto-applied, which of three kinds of domain mismatch actually blocks
 outreach. That is procedural knowledge an operator needs at the moment of use,
 which is what `SKILL.md` is for.
 
-**Why not just call the Apollo MCP directly?** MCP gives an agent tool access,
-not a method. Asked to "clean up my accounts" against raw MCP tools, a model
-will enrich, then reason its way to a ranking in prose, with weights nobody can
-audit and results that change between runs. The rubric-in-a-file design makes
-the ranking reproducible and arguable. It also survives the model being swapped.
+**Why not just call the Apollo MCP directly?** Both paths were tested, so this
+is an observation rather than an argument.
+
+MCP gives an agent tool access, not a method. Asked to "clean up my accounts"
+against raw MCP tools, a model will enrich, then reason its way to a ranking in
+prose — with weights nobody can audit and an order that changes between runs.
+The rubric-in-a-file design makes the ranking reproducible and arguable, and it
+survives the model being swapped underneath.
+
+It also does not buy access. Calling people search through the Apollo MCP
+returns the identical Free-plan refusal as the REST endpoint
+(`error_code: API_INACCESSIBLE`). **MCP is a transport, not a permission** — the
+plan gates at the API layer regardless of how a client reaches it. Worth knowing
+before designing around a connector.
+
+One genuine difference: connecting the MCP granted a one-time 100-credit bonus
+(`mcp_credit_grant` in the profile response). Helpful for a POC, but it is
+onboarding, not entitlement, so the client's credit budget still assumes the
+75/month ceiling.
 
 **Why gaps and conflicts are handled differently.** Filling an empty field from
 a vendor is safe. Overwriting a populated field because a vendor disagrees is

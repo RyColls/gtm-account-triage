@@ -55,6 +55,38 @@ This is why the skill is company-level. Any feature requiring a named contact,
 an email address or a phone number for a person is a paid-plan extension, not an
 oversight.
 
+## The MCP connector: same entitlements, different transport
+
+Apollo also ships an MCP connector. It was connected and tested directly on
+2026-09-10, and two things came out of it.
+
+**1. MCP does not change entitlements.** Calling
+`apollo_mixed_people_api_search` through the MCP returns the same refusal as the
+REST endpoint:
+
+```
+The api/v1/mixed_people/api_search API is not included in your Free plan and is
+not accessible. All paid plans include full API access.   (error_code: API_INACCESSIBLE)
+```
+
+Worth stating plainly: **MCP is a transport, not a permission.** The plan gates
+at the API layer no matter how a client reaches it. Anyone assuming the
+connector unlocks the paid surface will find out the expensive way.
+
+**2. Connecting the MCP granted 100 bonus credits.** The profile response
+carries an explicit `mcp_credit_grant: {granted: true, num_credits: 100}`,
+lifting the balance from the 75/month free allowance to 118 remaining. Useful
+for a POC, but not something to design around — it is a one-time onboarding
+grant, not a recurring entitlement, and the skill's credit budget still assumes
+the 75/month ceiling.
+
+**3. The work-email requirement did not apply.** Apollo's knowledge base states
+that MCP "requires you to sign in to Apollo with a work email address" and that
+"free or personal email addresses, like Gmail or Yahoo addresses, aren't
+supported." The connector authenticated and worked on a Gmail-registered
+account. That is the second place in this exercise where the documentation and
+the running system disagreed, and the running system won both times.
+
 ## Limits discovered empirically
 
 - **`bulk_enrich` accepts at most 10 domains per call.** Documented nowhere we

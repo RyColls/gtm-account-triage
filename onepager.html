@@ -318,7 +318,8 @@ Apollo ──────┘   (pure, no network, unit-tested)                �
     <p>The deterministic work belongs in scripts, and it’s there. What a bare script can’t carry is the procedure around it: dry-run before spending, read the credit cost aloud before a live run, never auto-apply a conflict, and distinguish three kinds of domain mismatch that have opposite remedies. That’s knowledge an operator needs at the moment of use.</p>
 
     <h3>Why not point an agent at the Apollo MCP directly</h3>
-    <p>MCP gives an agent tool access, not a method. Asked to “clean up my accounts” against raw tools, a model enriches and then reasons its way to a ranking in prose — with weights nobody can audit and an order that changes between runs. A rubric in a file is reproducible, arguable, and survives the model being swapped underneath it.</p>
+    <p>Both paths were tested, so this is an observation rather than an argument. MCP gives an agent tool access, not a method. Asked to “clean up my accounts” against raw tools, a model enriches and then reasons its way to a ranking in prose — with weights nobody can audit and an order that changes between runs. A rubric in a file is reproducible, arguable, and survives the model being swapped underneath it.</p>
+    <p>It also buys no access. People search through the Apollo MCP returns the identical Free-plan refusal as the REST endpoint — <code>API_INACCESSIBLE</code>. <strong>MCP is a transport, not a permission:</strong> the plan gates at the API layer however a client reaches it.</p>
 
     <h3>Gaps and conflicts are not the same thing</h3>
     <p>Filling an empty field from a vendor is safe. Overwriting a populated field because a vendor disagrees is how you destroy a CRM — the rep who typed “Bozeman” may have been on a call last week, and the vendor may be wrong. Gaps auto-patch; conflicts go to a human with both values and a reason.</p>
@@ -368,6 +369,7 @@ Apollo ──────┘   (pure, no network, unit-tested)                �
       <li><b>Every person-level endpoint returns 403</b> — people search, person enrichment, email and phone lookup. Paid plans only.</li>
       <li><b>75 credits per month</b>, one per company enriched. A 200-account book can’t be done in one pass on free, so the client enforces a spend budget and caches for 14 days.</li>
       <li><b>bulk_enrich caps at 10 domains</b> per call — undocumented; the API said so when a 15-domain payload failed.</li>
+      <li><b>The MCP connector changes none of this.</b> Same endpoints, same refusals. It did grant a one-time 100-credit bonus, which is onboarding rather than entitlement.</li>
     </ul>
     <p style="margin-top:20px">That entitlement check is why this is an account-level tool. The exercise’s suggested “ranked list of key people to reach out to” is not buildable on a free account — contact mapping is named as the paid-tier extension rather than discovered as a wall halfway through.</p>
   </section>
