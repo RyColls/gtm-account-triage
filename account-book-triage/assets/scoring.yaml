@@ -1,0 +1,171 @@
+# =============================================================================
+# scoring.yaml — the triage rubric
+# =============================================================================
+# EVERY number in this file is a business judgement, not a model output.
+#
+# This file exists because an LLM asked to "rank these accounts" will produce
+# a confident ordering with invented weights that cannot be audited or argued
+# with. A RevOps lead needs to be able to open the rubric, disagree with a
+# number, change it, and re-run. So the weights live here, the model never
+# computes them, and scripts/score.py does nothing but apply this file
+# arithmetically.
+#
+# Change a number here and the ranking changes. That is the point.
+# =============================================================================
+
+version: 1
+
+# -----------------------------------------------------------------------------
+# ICP definition
+# -----------------------------------------------------------------------------
+# ASSUMPTION: the seller is VantaOps — GTM analytics sold to revenue teams.
+# The buyer is a RevOps/Sales Ops leader at a B2B SaaS company big enough to
+# have a real revenue stack but not so big it has built one in-house.
+icp:
+  employee_range:
+    min: 200
+    max: 5000
+  # Matched case-insensitively as a substring of Apollo's `industry`.
+  target_industries:
+    - information technology & services
+    - computer software
+    - marketing & advertising
+
+# -----------------------------------------------------------------------------
+# DATA HEALTH (0-100) — is this record fit to act on?
+# -----------------------------------------------------------------------------
+# Deliberately separate from opportunity. A hot account with a broken record is
+# not a "medium" account; it is a hot account you cannot route, target, or
+# report on. Blending the two into one number hides exactly the problem the
+# skill exists to surface.
+data_health:
+  # Fields a rep needs before an account is workable.
+  required_fields:
+    - industry
+    - employee_count
+    - hq_city
+    - hq_state
+    - phone
+    - linkedin_url
+
+  weights:
+    completeness: 50   # proportion of required_fields present
+    freshness: 30      # how long since the record was last verified
+    consistency: 20    # does the CRM agree with the source of truth
+
+  freshness:
+    # Full marks at or under fresh_days; zero at or over stale_days;
+    # linear in between.
+    fresh_days: 90
+    stale_days: 365
+
+  consistency:
+    # Each detected conflict burns this many of the 20 consistency points.
+    # 7 means three conflicts zero the component — intentional: three
+    # disagreements with the source of truth means the record is not trustworthy.
+    penalty_per_conflict: 7
+
+  # Relative-difference threshold above which a numeric field (employee_count)
+  # counts as a conflict rather than normal drift. 0.25 = 25%.
+  numeric_conflict_threshold: 0.25
+
+# -----------------------------------------------------------------------------
+# OPPORTUNITY (0-100) — is something happening here worth a rep's hour?
+# -----------------------------------------------------------------------------
+opportunity:
+  # CALIBRATION NOTE — these are v2 weights. v1 was wrong and the fixture run
+  # proved it: 13 of 15 accounts scored ENGAGE_NOW, which is the same as having
+  # no ranking at all. Three specific defects, all fixed below:
+  #
+  #   1. hiring_recency awarded full marks to 13/15. Companies of this size post
+  #      roles continuously, so "posted within 7 days" is true of almost every
+  #      account and discriminates nothing. Weight cut and buckets tightened.
+  #   2. gtm_hiring_intensity saturated at a 40% GTM mix — which is roughly the
+  #      NORMAL mix for a B2B SaaS company. It was measuring "is a SaaS company",
+  #      not "is scaling its revenue org". Now scored on EXCESS over a baseline.
+  #   3. icp_fit handed 8 near-band points to 9,000-person companies well outside
+  #      the ICP, letting them rank alongside genuine mid-market targets.
+  #
+  # The lesson worth keeping: a signal that fires for almost every record is not
+  # a signal. Always check the distribution, not just whether the code runs.
+  weights:
+    gtm_hiring_intensity: 45
+    hiring_recency: 15
+    news_recency: 10
+    icp_fit: 30
+
+  gtm_hiring_intensity:
+    # Share of open roles that are go-to-market roles, measured as excess over
+    # the baseline mix. A company whose GTM share sits at the baseline is simply
+    # a software company; one at saturation is visibly building a revenue org.
+    baseline_ratio: 0.25      # typical B2B SaaS GTM share — scores zero
+    saturation_ratio: 0.55    # full marks at or above this
+    # Below this many total postings the ratio is statistically meaningless
+    # (1 of 1 GTM roles is not a 100% signal), so intensity scores zero.
+    min_postings_for_signal: 5
+
+  hiring_recency:
+    # Days since the most recent posting. Buckets, not a curve — a rep does not
+    # care about the difference between 3 and 5 days.
+    buckets:
+      - {max_days: 3, points: 15}
+      - {max_days: 14, points: 9}
+      - {max_days: 45, points: 4}
+    default_points: 0        # older than the last bucket, or no postings at all
+
+  news_recency:
+    # Weighted lowest on purpose. Apollo's news feed is noisy — the captured
+    # sample includes listicles and comparison-site spam ("Best enterprise web
+    # hosting platforms compared") that mention a company without saying
+    # anything about its buying cycle. News corroborates; it does not trigger.
+    buckets:
+      - {max_days: 30, points: 10}
+      - {max_days: 90, points: 6}
+      - {max_days: 180, points: 2}
+    default_points: 0
+
+  icp_fit:
+    in_range_points: 20        # employee_count inside icp.employee_range
+    near_range_points: 5       # within near_range_multiplier of a boundary
+    near_range_multiplier: 2.0
+    industry_match_points: 10
+
+# -----------------------------------------------------------------------------
+# ACTION ROUTING
+# -----------------------------------------------------------------------------
+# The output is an action, not a leaderboard. Evaluated top to bottom;
+# first match wins.
+#
+# FIX_DATA comes first by design: if the record is not trustworthy, "engage
+# now" is advice a rep cannot safely follow. Hygiene gates engagement.
+routing:
+  # An unresolved identity conflict is an absolute gate, independent of score.
+  # If the CRM says "Drift" and the source of truth says "Salesloft", the rep is
+  # about to call the wrong company — and no opportunity score should be able to
+  # override that. In the v1 rubric Drift routed to ENGAGE_NOW at 96/100.
+  - action: FIX_DATA
+    when: {has_high_severity_conflict: true}
+    meaning: >
+      Account identity is in question — the CRM and the source of truth disagree
+      on who this company is. Resolve before any outreach.
+
+  - action: FIX_DATA
+    when: {data_health_below: 50}
+    meaning: >
+      Record is not fit to act on. Apply the proposed patch and re-run before
+      routing this account to a rep.
+
+  - action: ENGAGE_NOW
+    when: {opportunity_at_least: 70}
+    meaning: >
+      Live buying signals and a clean enough record. Worth a rep's hour this week.
+
+  - action: NURTURE
+    when: {opportunity_at_least: 40}
+    meaning: >
+      Real but not urgent. Keep in sequence; revisit when signals move.
+
+  - action: DEPRIORITIZE
+    when: {}
+    meaning: >
+      No live signal. Do not spend rep time this quarter.
