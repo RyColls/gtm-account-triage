@@ -1,0 +1,16 @@
+account_id,account_name,domain,industry,employee_count,hq_city,hq_state,phone,linkedin_url,owner,lifecycle_stage,arr_usd,last_enriched
+ACC-1001,Datadog,datadoghq.com,Information Technology & Services,1200,New York,New York,+1 866-329-4466,http://www.linkedin.com/company/datadog,jbrennan@vantaops.ai,Customer,148000,2023-02-11
+ACC-1002,Snowflake,snowflake.com,information technology & services,9300,Bozeman,Montana,+1 844-766-9355,http://www.linkedin.com/company/snowflake-computing,jbrennan@vantaops.ai,Opportunity,0,2026-09-14
+ACC-1003,Gong,https://www.Gong.io/,Information Technology & Services,1400,San Francisco,California,+1 650-276-3068,http://www.linkedin.com/company/gong-io,dpatel@vantaops.ai,Opportunity,0,2026-06-19
+ACC-1004,Clari,clari.com,Information Technology & Services,810,Sunnyvale,California,+1 650-265-2111,http://www.linkedin.com/company/clari,dpatel@vantaops.ai,Customer,92000,2026-08-28
+ACC-1005,Outreach,outreach.io,Information Technology & Services,1100,Seattle,Washington,+1 888-938-7356,http://www.linkedin.com/company/outreach-saas,jbrennan@vantaops.ai,Opportunity,0,2026-09-14
+ACC-1006,Klaviyo,klaviyo.com,Software,2400,Boston,Massachusetts,+1 800-338-1744,http://www.linkedin.com/company/klaviyo,mokafor@vantaops.ai,Prospect,0,2026-07-15
+ACC-1007,Amplitude,amplitude.com,Information Technology & Services,800,San Francisco,California,+1 650-988-5131,http://www.linkedin.com/company/amplitude-analytics,mokafor@vantaops.ai,Prospect,0,2026-09-14
+ACC-1008,Segment,segment.com,Information Technology & Services,550,San Francisco,California,,http://www.linkedin.com/company/segment-io,dpatel@vantaops.ai,Churned,0,2024-09-30
+ACC-1009,Mixpanel,mixpanel.com,Information Technology & Services,450,San Francisco,California,+1 888-510-2370,http://www.linkedin.com/company/mixpanel-inc-,mokafor@vantaops.ai,Prospect,0,2026-09-14
+ACC-1010,Pendo,pendo.io,Information Technology & Services,980,Durham,North Carolina,+1 877-320-8484,http://www.linkedin.com/company/pendo-io,jbrennan@vantaops.ai,Opportunity,0,2026-08-05
+ACC-1011,Looker,looker.com,Information Technology & Services,650,Santa Cruz,California,+1 831-244-0340,http://www.linkedin.com/company/looker,dpatel@vantaops.ai,Prospect,0,2021-06-08
+ACC-1012,HubSpot,hubspot.com,Information Technology & Services,3000,Cambridge,Massachusetts,+1 888-482-7768,http://www.linkedin.com/company/hubspot,mokafor@vantaops.ai,Customer,215000,2024-03-19
+ACC-1013,ZoomInfo,zoominfo.com,Information Technology & Services,3200,Vancouver,Washington,+1 800-914-1220,http://www.linkedin.com/company/zoominfo,jbrennan@vantaops.ai,Customer,61000,2026-09-01
+ACC-1014,6sense,6sense.com,information technology & services,1200,San Francisco,California,+1 415-212-9225,http://www.linkedin.com/company/6sense,dpatel@vantaops.ai,Prospect,0,2026-09-14
+ACC-1015,Drift,drift.com,Information Technology & Services,700,Boston,Massachusetts,+1 617-917-0755,http://www.linkedin.com/company/drift,mokafor@vantaops.ai,Opportunity,0,2023-08-22

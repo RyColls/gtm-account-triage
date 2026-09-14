@@ -1,0 +1,13 @@
+account_id,account_name,field,severity,crm_value,apollo_value,reason
+ACC-1012,HubSpot,employee_count,medium,3000,9100,headcount differs by 67% (threshold 25%)
+ACC-1005,Outreach,domain,medium,outreach.io,outreach.ai,Same brand on a different TLD. Likely a rebrand or vendor variance rather than a different company. Confirm which domain is canonical before bulk email.
+ACC-1003,Gong,domain,medium,gong.io,gong-next-sanity-web.vercel.app,"Apollo returned a deployment/CDN host, not a corporate domain. The vendor record is suspect here, not the CRM — keep the CRM value and do not patch from this enrichment."
+ACC-1006,Klaviyo,industry,low,Software,marketing & advertising,CRM and Apollo disagree on a populated field
+ACC-1010,Pendo,hq_city,low,Durham,Raleigh,CRM and Apollo disagree on a populated field
+ACC-1015,Drift,domain,high,drift.com,salesloft.com,Apollo resolved this domain to a different company. Almost always an acquisition the CRM has not absorbed. Do not contact until resolved — outreach would reach the wrong organisation.
+ACC-1015,Drift,account_name,high,Drift,Salesloft,Company name disagrees entirely. Usually an acquisition the CRM has not absorbed.
+ACC-1015,Drift,hq_city,low,Boston,Atlanta,CRM and Apollo disagree on a populated field
+ACC-1015,Drift,hq_state,low,Massachusetts,Georgia,CRM and Apollo disagree on a populated field
+ACC-1001,Datadog,employee_count,medium,1200,8100,headcount differs by 85% (threshold 25%)
+ACC-1002,Snowflake,hq_city,low,Bozeman,St. Cloud,CRM and Apollo disagree on a populated field
+ACC-1002,Snowflake,hq_state,low,Montana,Minnesota,CRM and Apollo disagree on a populated field
