@@ -7,6 +7,11 @@ records nobody should act on until a human resolves them.
 Grounded in live [Apollo.io](https://apollo.io) company data: firmographic
 enrichment, open job postings, and news.
 
+**One-pager** — [read it rendered](https://rycolls.github.io/gtm-account-triage/) · [PDF](docs/account-book-triage-onepager.pdf)
+GitHub displays `.html` files as source rather than rendering them, so use one of those links.
+
+**Demo** — _Loom link to be added._
+
 ---
 
 ## The problem
