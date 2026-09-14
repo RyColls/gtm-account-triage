@@ -10,7 +10,7 @@ enrichment, open job postings, and news.
 **One-pager** — [read it rendered](https://rycolls.github.io/gtm-account-triage/) · [PDF](docs/account-book-triage-onepager.pdf)
 GitHub displays `.html` files as source rather than rendering them, so use one of those links.
 
-**Demo** — _Loom link to be added._
+**Demo** — [4-minute walkthrough](https://www.loom.com/share/d4b25ccc5fa54d77a2590e200386a7c1)
 
 ---
 
