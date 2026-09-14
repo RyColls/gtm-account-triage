@@ -8,7 +8,7 @@ within a week of normal development.
 
 The scoring tests deliberately assert HAND-COMPUTED values. If someone edits
 scoring.yaml, these fail loudly and tell them the ranking moved — which is the
-correct behaviour for a rubric that drives who a sales team calls.
+correct behavior for a rubric that drives who a sales team calls.
 """
 
 import json

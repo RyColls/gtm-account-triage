@@ -104,7 +104,7 @@ Apollo ─────┘   (pure, testable, no network)               │
 
 **The division of labour is the design decision.** `scripts/` does everything
 deterministic — API calls, gap detection, scoring arithmetic, writes. `SKILL.md`
-holds only workflow and judgement. `assets/scoring.yaml` holds every weight, so
+holds only workflow and judgment. `assets/scoring.yaml` holds every weight, so
 a RevOps lead can disagree with a number, change it, and re-run.
 
 The model never computes a score, never invents a weight, and never phrases a
@@ -115,7 +115,7 @@ surface.
 ## Design decisions worth defending
 
 **Why a skill and not a script?** The deterministic work belongs in scripts and
-is here. What a bare script cannot carry is the judgement around it: when to dry
+is here. What a bare script cannot carry is the judgment around it: when to dry
 run, how to read credit cost aloud before spending it, why a conflict must never
 be auto-applied, which of three kinds of domain mismatch actually blocks
 outreach. That is procedural knowledge an operator needs at the moment of use,
@@ -158,7 +158,7 @@ deserves its own tool), and any attempt at intent data.
 AI wrote most of this code, and the write-up is honest about the parts it got
 wrong, because those are the interesting parts.
 
-**Helped:** scaffolding the client, the CSV/date normalisation edge cases, the
+**Helped:** scaffolding the client, the CSV/date normalization edge cases, the
 report formatting, and the test suite. Roughly an afternoon's work compressed
 into an hour.
 

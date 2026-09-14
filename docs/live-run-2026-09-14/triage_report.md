@@ -32,7 +32,7 @@ _Generated 2026-09-14 · source: fixtures_
 - **domain** — CRM `gong.io` vs Apollo `gong-next-sanity-web.vercel.app` · _Apollo returned a deployment/CDN host, not a corporate domain. The vendor record is suspect here, not the CRM — keep the CRM value and do not patch from this enrichment._
 
 ### Drift (drift.com)
-- **domain** — CRM `drift.com` vs Apollo `salesloft.com` · _Apollo resolved this domain to a different company. Almost always an acquisition the CRM has not absorbed. Do not contact until resolved — outreach would reach the wrong organisation._
+- **domain** — CRM `drift.com` vs Apollo `salesloft.com` · _Apollo resolved this domain to a different company. Almost always an acquisition the CRM has not absorbed. Do not contact until resolved — outreach would reach the wrong organization._
 - **account_name** — CRM `Drift` vs Apollo `Salesloft` · _Company name disagrees entirely. Usually an acquisition the CRM has not absorbed._
 
 ### Datadog (datadoghq.com)

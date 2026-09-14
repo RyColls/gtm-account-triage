@@ -1,7 +1,7 @@
 # =============================================================================
 # scoring.yaml — the triage rubric
 # =============================================================================
-# EVERY number in this file is a business judgement, not a model output.
+# EVERY number in this file is a business judgment, not a model output.
 #
 # This file exists because an LLM asked to "rank these accounts" will produce
 # a confident ordering with invented weights that cannot be audited or argued

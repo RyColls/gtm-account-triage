@@ -1,5 +1,5 @@
 """
-score.py — applies assets/scoring.yaml. Contains no judgement of its own.
+score.py — applies assets/scoring.yaml. Contains no judgment of its own.
 
 Every threshold, weight and bucket is read from the YAML. If you want to argue
 with the ranking, argue with that file. This module only does arithmetic, and

@@ -214,7 +214,7 @@ class ApolloClient:
         frequently answers with a different primary_domain — a marketing
         redirect, a stale CDN host, or the acquirer after a merger — and the
         audit needs to see that disagreement rather than have it silently
-        normalised away.
+        normalized away.
         """
         out: Dict[str, dict] = {}
         to_fetch: List[str] = []

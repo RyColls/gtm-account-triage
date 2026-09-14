@@ -47,7 +47,7 @@ def normalize_domain(raw: Optional[str]) -> str:
     """Reduce a hand-entered domain to a comparable form.
 
     Real CRM exports contain 'https://www.Gong.io/', 'GONG.IO', and 'gong.io'
-    as three different accounts. Normalising before comparison is what turns
+    as three different accounts. Normalizing before comparison is what turns
     those into one.
     """
     if not raw:
@@ -96,7 +96,7 @@ def classify_domain_conflict(crm_domain: str, apollo_domain: str) -> Dict[str, A
                       the CRM has not absorbed. This one is a hard stop.
 
     Only `identity` is high severity, because only `identity` means a rep is
-    about to contact the wrong organisation.
+    about to contact the wrong organization.
     """
     base = {"field": "domain", "crm": crm_domain, "apollo": apollo_domain}
 
@@ -131,7 +131,7 @@ def classify_domain_conflict(crm_domain: str, apollo_domain: str) -> Dict[str, A
         "reason": (
             "Apollo resolved this domain to a different company. Almost always "
             "an acquisition the CRM has not absorbed. Do not contact until "
-            "resolved — outreach would reach the wrong organisation."
+            "resolved — outreach would reach the wrong organization."
         ),
     }
 

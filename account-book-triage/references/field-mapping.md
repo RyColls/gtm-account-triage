@@ -1,4 +1,4 @@
-# Field mapping and normalisation
+# Field mapping and normalization
 
 ## CSV ↔ Apollo
 
@@ -36,7 +36,7 @@ Only these are ever written, and only when the CSV field was empty:
 because Apollo derives its own values for those on the account object and a
 write would simply fight the vendor's own enrichment.
 
-## Normalisation rules
+## Normalization rules
 
 **Domains.** Strip scheme, `www.`, path and trailing dot; lowercase. So
 `https://www.Gong.io/`, `GONG.IO` and `gong.io` all reduce to `gong.io`. Real
@@ -46,7 +46,7 @@ CRM exports contain all three as separate accounts.
 suffixes (`inc`, `llc`, `ltd`, `corp`, `co`, `holdings`, `group`,
 `technologies`, `software`, `labs`, `io`). `Pendo.io, Inc.` → `pendo`.
 
-A name conflict is raised only when neither normalised name contains the other.
+A name conflict is raised only when neither normalized name contains the other.
 That containment rule is what stops `Segment` vs `Twilio Segment` from being
 flagged as an acquisition — it is the same company under its parent's branding,
 and blocking a rep over it would be a false positive.

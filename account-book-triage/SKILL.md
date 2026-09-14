@@ -1,10 +1,10 @@
 ---
 name: account-book-triage
 description: >-
-  Audits, enriches and prioritises a book of CRM accounts against live Apollo.io
+  Audits, enriches and prioritizes a book of CRM accounts against live Apollo.io
   company data, then emits a ranked next-best-action list plus a reviewable set
   of data conflicts. Use when someone asks to clean up, audit, enrich, score,
-  rank, prioritise or triage accounts, a territory, a target list, a book of
+  rank, prioritize or triage accounts, a territory, a target list, a book of
   business or a CRM export; when they mention stale, incomplete, duplicate or
   conflicting account records, missing firmographics, or data hygiene; or when
   they ask which accounts a rep should work next and why. Reads a CSV export or
@@ -157,7 +157,7 @@ nothing:
    an account scored 71 will not trust the 71. The JSON output carries the full
    breakdown and the reasons that fired.
 
-4. **Do not re-derive the weights.** If asked to change prioritisation, edit
+4. **Do not re-derive the weights.** If asked to change prioritization, edit
    `assets/scoring.yaml` and re-run. Do not reason about ranking in prose and
    present the result as the tool's output.
 
@@ -171,8 +171,8 @@ nothing:
 Load these only when needed:
 
 - `references/apollo-endpoints.md` — verified Free-plan entitlements, credit
-  costs, rate and batch limits, and the exact 403 behaviour on gated endpoints.
-- `references/field-mapping.md` — CSV ↔ Apollo field mapping, normalisation
+  costs, rate and batch limits, and the exact 403 behavior on gated endpoints.
+- `references/field-mapping.md` — CSV ↔ Apollo field mapping, normalization
   rules, and how to adapt the skill to a different CRM export.
 
 ## Layout
@@ -184,7 +184,7 @@ account-book-triage/
 │   ├── apollo_client.py   # the only module that talks to Apollo
 │   ├── audit.py           # gaps / staleness / conflicts (pure, testable)
 │   ├── signals.py         # job postings + news -> scoreable numbers
-│   ├── score.py           # applies scoring.yaml; no judgement of its own
+│   ├── score.py           # applies scoring.yaml; no judgment of its own
 │   └── run_triage.py      # orchestrator CLI
 ├── references/
 └── assets/
