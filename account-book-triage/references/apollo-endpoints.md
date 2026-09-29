@@ -84,7 +84,7 @@ the 75/month ceiling.
 that MCP "requires you to sign in to Apollo with a work email address" and that
 "free or personal email addresses, like Gmail or Yahoo addresses, aren't
 supported." The connector authenticated and worked on a Gmail-registered
-account. That is the second place in this exercise where the documentation and
+account. That is the second place in this build where the documentation and
 the running system disagreed, and the running system won both times.
 
 ## Limits discovered empirically
